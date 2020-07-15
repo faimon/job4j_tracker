@@ -26,10 +26,13 @@ public class StartUI {
                 System.out.println("=== Edit item ===");
                 System.out.println("Enter Id Item:");
                 int id = Integer.valueOf(scanner.nextLine());
-                if (tracker.replace(id, new Item())) {
+                System.out.println("=== Enter name Item:");
+                String name = scanner.nextLine();
+                Item item = new Item();
+                item.setName(name);
+                if (tracker.replace(id, item)) {
                     System.out.println("Editing was completed successfully");
-                }
-                else {
+                } else {
                     System.out.println("Error: editing error");
                 }
             } else if (select == 3) {
@@ -38,30 +41,33 @@ public class StartUI {
                 int id = Integer.valueOf(scanner.nextLine());
                 if (tracker.delete(id)) {
                     System.out.println("Deleting was completed successfully");
-                }
-                else {
+                } else {
                     System.out.println("Error: Deleting error");
                 }
             } else if (select == 4) {
                 System.out.println("=== Find item by Id");
                 System.out.println("Enter id:");
                 int id = Integer.valueOf(scanner.nextLine());
-                if (tracker.findById(id) != null) {
-                    System.out.println("Found item: " + tracker.findById(id));
-                }
-                else {
+                Item item = new Item();
+                item = tracker.findById(id);
+                if (item != null) {
+                    System.out.println("Found item: " + item);
+                } else {
                     System.out.println("Error: item was not found");
                 }
             } else if (select == 5) {
                 System.out.println("=== Find items by name ===");
                 System.out.println("Enter name:");
                 String name = scanner.nextLine();
-                Item[] founded = tracker.findByName(name);
-                        for (Item it: founded) {
-                            System.out.println(it);
-                        }
-            }
-            else if (select == 6) {
+                Item[] foundedItems = tracker.findByName(name);
+                if (foundedItems.length > 0) {
+                    for (Item it : foundedItems) {
+                        System.out.println(it);
+                    }
+                } else {
+                    System.out.println("Error: items were not found");
+                }
+            } else if (select == 6) {
                 run = false;
             }
         }
@@ -84,3 +90,4 @@ public class StartUI {
         new StartUI().init(scanner, tracker);
     }
 }
+
