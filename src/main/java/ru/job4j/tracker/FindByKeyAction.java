@@ -1,9 +1,15 @@
 package ru.job4j.tracker;
 
 public class FindByKeyAction implements UserAction {
+    private final Output out;
+
+    public FindByKeyAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
-        return "=== Find items by name ===";
+        return "Find items by name";
     }
 
     @Override
@@ -12,10 +18,10 @@ public class FindByKeyAction implements UserAction {
         Item[] foundedItems = tracker.findByName(name);
         if (foundedItems.length > 0) {
             for (Item it : foundedItems) {
-                System.out.println(it);
+                out.println(it);
             }
         } else {
-            System.out.println("Error: items were not found");
+            out.println("Error: items were not found");
         }
         return true;
     }
