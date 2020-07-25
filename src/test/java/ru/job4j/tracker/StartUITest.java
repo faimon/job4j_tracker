@@ -27,7 +27,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("Ivan");
         tracker.add(item);
-        Input in = new StubInput(new String[] {"0", "0", "Igor", "1"});
+        Input in = new StubInput(new String[] {"0", "1", "Igor", "1"});
         ArrayList<UserAction> actions = new ArrayList<>();
         actions.add(new EditAction(output));
         actions.add(new ExitAction(output));
@@ -41,7 +41,7 @@ public class StartUITest {
         Item item = new Item("Ivan");
         Tracker tracker = new Tracker();
         tracker.add(item);
-        Input in = new StubInput(new String[] {"0", "0", "1"});
+        Input in = new StubInput(new String[] {"0", "1", "1"});
         ArrayList<UserAction> actions = new ArrayList<>();
         actions.add(new DeleteAction(output));
         actions.add(new ExitAction(output));
@@ -112,7 +112,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         tracker.add(item);
         Output out = new StubOutput();
-        Input in = new StubInput(new String[] {"0", "0", "1"});
+        Input in = new StubInput(new String[] {"0", "1", "1"});
         ArrayList<UserAction> actions = new ArrayList<>();
         actions.add(new FindByIdAction(out));
         actions.add(new ExitAction(out));
