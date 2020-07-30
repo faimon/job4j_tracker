@@ -6,12 +6,11 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class Profiles {
-    private Address address;
 
-    public static List<Address> collect(List<Profiles> profiles) {
+    public static List<Address> collect(List<Profile> profiles) {
         Comparator<Address> compByCity = (left, right) -> left.getCity().compareTo(right.getCity());
         List<Address> rsl = profiles.stream()
-                .map(profiles1 -> profiles1.address)
+                .map(profiles1 -> profiles1.getAddress())
                 .sorted(compByCity)
                 .distinct()
                 .collect(Collectors.toList());
