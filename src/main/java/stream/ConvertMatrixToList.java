@@ -1,20 +1,24 @@
 package stream;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ConvertMatrixToList {
     public static void main(String[] args) {
-        List<List<Integer>> matrix = List.of(
-                List.of(1, 2),
-                List.of(3, 4),
-                List.of(5, 6)
-        );
-        List<Integer> list = convert(matrix);
+        Integer[][] massiv = new Integer[2][2];
+        massiv[0][0] = 1;
+        massiv[0][1] = 2;
+        massiv[1][0] = 3;
+        massiv[1][1] = 4;
+        List<Integer> list = convert(massiv);
         System.out.println(list);
     }
 
-    public static List<Integer> convert(List<List<Integer>> matrix) {
-        return matrix.stream().flatMap(x -> x.stream()).collect(Collectors.toList());
+    public static List<Integer> convert(Integer[][] matrix) {
+        return Stream.of(matrix)
+                .flatMap(x -> Arrays.stream(x))
+                .collect(Collectors.toList());
     }
 }
