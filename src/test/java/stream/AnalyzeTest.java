@@ -58,7 +58,7 @@ public class AnalyzeTest {
     }
 
     @Test
-    public void whenBestPupil() {
+    public void whenBestStudent() {
         Tuple best = Analyze.bestStudent(
                 List.of(
                         new Pupil("Ivanov", List.of(new Subject("Math", 100), new Subject("Lang", 100))),
@@ -70,7 +70,7 @@ public class AnalyzeTest {
 
     @Test
     public void whenBestSubject() {
-        Tuple best = Analyze.bestStudent(
+        Tuple best = Analyze.bestSubject(
                 List.of(
                         new Pupil("Ivanov", List.of(new Subject("Math", 100), new Subject("Lang", 40))),
                         new Pupil("Petrov", List.of(new Subject("Math", 60), new Subject("Lang", 60)))
