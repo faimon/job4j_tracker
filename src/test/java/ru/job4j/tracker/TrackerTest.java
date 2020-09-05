@@ -10,7 +10,7 @@ public class TrackerTest {
 
     @Test
     public void whenReplace() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item();
         bug.setName("Bug");
         tracker.add(bug);
@@ -24,7 +24,7 @@ public class TrackerTest {
 
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item();
         bug.setName("Bug");
         tracker.add(bug);
