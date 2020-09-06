@@ -13,6 +13,13 @@ public class SqlTracker implements Store {
     private static final Logger LOG = LoggerFactory.getLogger(SqlTracker.class.getName());
     private Connection cn;
 
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection connection) {
+        this.cn = connection;
+    }
+
     @Override
     public void init() {
         try (InputStream in = SqlTracker.class
@@ -44,9 +51,15 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        try (PreparedStatement ps = cn.prepareStatement("INSERT INTO items(name) VALUES(?)")) {
+        try (PreparedStatement ps = cn.prepareStatement("INSERT INTO items(name) VALUES(?)",
+                Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, item.getName());
             ps.executeUpdate();
+            try (ResultSet id = ps.getGeneratedKeys()) {
+                if (id.next()) {
+                    item.setId(id.getInt(1));
+                }
+            }
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
@@ -98,7 +111,8 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> rsl = new ArrayList<>();
-        try (PreparedStatement ps = cn.prepareStatement("SELECT id, name FROM items WHERE name = ?")) {
+        try (PreparedStatement ps = cn
+                .prepareStatement("SELECT id, name FROM items WHERE name = ?")) {
             ps.setString(1, key);
             ResultSet rs = ps.executeQuery();
             while (!rs.isLast()) {
