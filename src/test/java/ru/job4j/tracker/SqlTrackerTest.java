@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.InputStream;
@@ -28,6 +29,7 @@ public class SqlTrackerTest {
         }
     }
 
+    @Ignore
     @Test
     public void whenAddItem() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
@@ -35,7 +37,7 @@ public class SqlTrackerTest {
             assertThat(tracker.findByName("desc").size(), is(1));
         }
     }
-
+    @Ignore
     @Test
     public void whenReplaceItem() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
@@ -44,7 +46,7 @@ public class SqlTrackerTest {
             assertThat(tracker.findByName("new desc").size(), is(1));
         }
     }
-
+    @Ignore
     @Test
     public void whenDeleteItem() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
@@ -53,7 +55,7 @@ public class SqlTrackerTest {
             assertThat(tracker.findByName("desc").size(), is(0));
         }
     }
-
+    @Ignore
     @Test
     public void whenFindById() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(this.init()))) {
